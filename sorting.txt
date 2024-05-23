@@ -1,0 +1,418 @@
+INSERTION SORT- ASCENDING ORDER
+
+#include<stdio.h>
+void insertion_sort(int a[],int n)
+{
+    int i,j,temp;
+   for(i=1;i<n;i++)
+   {
+       temp=a[i];
+       for(j=i-1;a[j]>temp&&j>=0;j--)
+       a[j+1]=a[j];
+    a[j+1]=temp;   
+   }
+   for(i=0;i<n;i++)
+     printf("%d ",a[i]);
+}
+void main()
+{
+    int i,a[10];
+    printf("ENTER 10 ELEMENTS \n");
+    for(i=0;i<10;i++)
+      scanf("%d",&a[i]);
+    insertion_sort(a,10);  
+}
+
+INSERTION SORT-DESCENDING ORDER
+
+#include<stdio.h>
+void insertion_sort(int a[],int n)
+{
+    int i,j,temp;
+   for(i=1;i<n;i++)
+   {
+       temp=a[i];
+       for(j=i-1;a[j]<temp&&j>=0;j--)
+       a[j+1]=a[j];
+    a[j+1]=temp;   
+   }
+   for(i=0;i<n;i++)
+     printf("%d ",a[i]);
+}
+void main()
+{
+    int i,a[10];
+    printf("ENTER 10 ELEMENTS \n");
+    for(i=0;i<10;i++)
+      scanf("%d",&a[i]);
+    insertion_sort(a,10);  
+}
+
+INSERTION SORT MENU DRIVEN:
+
+#include<stdio.h>
+void insertion_ascending(int a[],int n)
+{
+    int i,j,temp;
+   for(i=1;i<n;i++)
+   {
+       temp=a[i];
+       for(j=i-1;a[j]>temp&&j>=0;j--)
+       a[j+1]=a[j];
+    a[j+1]=temp;   
+   }
+   for(i=0;i<n;i++)
+     printf("%d ",a[i]);
+}
+void insertion_descending(int a[],int n)
+{
+    int i,j,temp;
+   for(i=1;i<n;i++)
+   {
+       temp=a[i];
+       for(j=i-1;a[j]<temp&&j>=0;j--)
+       a[j+1]=a[j];
+    a[j+1]=temp;   
+   }
+   for(i=0;i<n;i++)
+     printf("%d ",a[i]);
+}
+void main()
+{
+    int i,a[10],ch;
+    printf("ENTER 10 ELEMENTS \n");
+    for(i=0;i<10;i++)
+      scanf("%d",&a[i]);
+    printf("ENTER CHOICE\n1.ASCENDING ORDER \n2.DESCENDING ORDER \n");
+    scanf("%d",&ch);
+    switch(ch)
+    {
+        case 1:
+               insertion_ascending(a,10);  
+               break;
+        case 2:
+               insertion_descending(a,10);  
+               break;
+        default:
+               printf("WRONG INPUT");
+    }
+}
+
+
+BUBBLE SORT- ASCENDING ORDER
+
+#include<stdio.h>
+void bubble_sort(int a[],int n)
+{
+    int i,j,temp;
+    for(i=1;i<n;i++)
+    {
+        for(j=0;j<n-1;j++)
+        {
+            if(a[j]>a[j+1])
+            {
+                temp=a[j];
+                a[j]=a[j+1];
+                a[j+1]=temp;
+            }
+        }
+    }
+   for(i=0;i<n;i++)
+     printf("%d ",a[i]);
+}
+void main()
+{
+    int i,a[10];
+    printf("ENTER 10 ELEMENTS \n");
+    for(i=0;i<10;i++)
+      scanf("%d",&a[i]);
+    bubble_sort(a,10);  
+}
+
+
+BUBBLE SORT- DESCENDING ORDER
+
+#include<stdio.h>
+void bubble_sort(int a[],int n)
+{
+    int i,j,temp;
+    for(i=1;i<n;i++)
+    {
+        for(j=0;j<n-1;j++)
+        {
+            if(a[j]<a[j+1])
+            {
+                temp=a[j];
+                a[j]=a[j+1];
+                a[j+1]=temp;
+            }
+        }
+    }
+   for(i=0;i<n;i++)
+     printf("%d ",a[i]);
+}
+void main()
+{
+    int i,a[10];
+    printf("ENTER 10 ELEMENTS \n");
+    for(i=0;i<10;i++)
+      scanf("%d",&a[i]);
+    bubble_sort(a,10);  
+}
+
+BUBBLE SORT MENU DRIVEN:
+
+#include<stdio.h>
+void bubble_ascending(int a[],int n)
+{
+    int i,j,temp;
+    for(i=1;i<n;i++)
+    {
+        for(j=0;j<n-1;j++)
+        {
+            if(a[j]>a[j+1])
+            {
+                temp=a[j];
+                a[j]=a[j+1];
+                a[j+1]=temp;
+            }
+        }
+    }
+   for(i=0;i<n;i++)
+     printf("%d ",a[i]);
+}
+void bubble_descending(int a[],int n)
+{
+    int i,j,temp;
+    for(i=1;i<n;i++)
+    {
+        for(j=0;j<n-1;j++)
+        {
+            if(a[j]<a[j+1])
+            {
+                temp=a[j];
+                a[j]=a[j+1];
+                a[j+1]=temp;
+            }
+        }
+    }
+   for(i=0;i<n;i++)
+     printf("%d ",a[i]);
+}
+void main()
+{
+    int i,a[10],ch;
+    printf("ENTER 10 ELEMENTS \n");
+    for(i=0;i<10;i++)
+      scanf("%d",&a[i]);
+    printf("ENTER CHOICE\n1.ASCENDING ORDER \n2.DESCENDING ORDER \n");
+    scanf("%d",&ch);
+    switch(ch)
+    {
+        case 1:
+               bubble_ascending(a,10);  
+               break;
+        case 2:
+               bubble_descending(a,10);  
+               break;
+        default:
+               printf("WRONG INPUT");
+    }
+}
+
+
+MERGE SORT-ASCENDING
+
+#include<stdio.h>
+#define MAX 30
+void merge(int a[],int l,int m, int u)
+{
+    int c[MAX];
+    int i,j,k;
+    i=l;
+    j=m+1;
+    k=0;
+    while(i<=m && j<=u)
+    {
+        if(a[i]<a[j])
+        {
+            c[k]=a[i];
+            k++;
+            i++;
+        }
+        else
+        {
+          c[k]=a[j];
+          k++;
+          j++;
+        }
+    }
+    while(i<=m)
+    {
+        c[k]=a[i];
+        i++;
+        k++;
+    }
+    while(j<=u)
+    {
+        c[k]=a[j];
+        k++;
+        j++;
+    }
+    for(i=l,j=0;i<=u;i++,j++)
+        a[i]=c[j];
+}
+void merge_sort(int a[],int i,int j)
+{
+    int k;
+    if (i<j)
+    {
+      k=(i+j)/2;
+      merge_sort(a,i,k);
+      merge_sort(a,k+1,j);
+      merge(a,i,k,j);
+    }
+}
+int main()
+{
+    int a[30],n,i;
+    printf("ENTER NUMBER OF ELEMENTS \n");
+    scanf("%d",&n);
+    printf("ENTER ELEMENTS \n");
+    for(i=0;i<n;i++)
+      scanf("%d",&a[i]);
+    merge_sort(a,0,n-1);
+    printf("SORETD ARRAY IS: \n");
+    for(i=0;i<n;i++)
+      printf("%d ",a[i]);
+}
+
+MERGE SORT-DESCENDING
+
+#include<stdio.h>
+#define MAX 30
+void merge(int a[],int l,int m, int u)
+{
+    int c[MAX];
+    int i,j,k;
+    i=l;
+    j=m+1;
+    k=0;
+    while(i<=m && j<=u)
+    {
+        if(a[i]>a[j])
+        {
+            c[k]=a[i];
+            k++;
+            i++;
+        }
+        else
+        {
+          c[k]=a[j];
+          k++;
+          j++;
+        }
+    }
+    while(i<=m)
+    {
+        c[k]=a[i];
+        i++;
+        k++;
+    }
+    while(j<=u)
+    {
+        c[k]=a[j];
+        k++;
+        j++;
+    }
+    for(i=l,j=0;i<=u;i++,j++)
+        a[i]=c[j];
+}
+void merge_sort(int a[],int i,int j)
+{
+    int k;
+    if (i<j)
+    {
+      k=(i+j)/2;
+      merge_sort(a,i,k);
+      merge_sort(a,k+1,j);
+      merge(a,i,k,j);
+    }
+}
+int main()
+{
+    int a[30],n,i;
+    printf("ENTER NUMBER OF ELEMENTS \n");
+    scanf("%d",&n);
+    printf("ENTER ELEMENTS \n");
+    for(i=0;i<n;i++)
+      scanf("%d",&a[i]);
+    merge_sort(a,0,n-1);
+    printf("SORETD ARRAY IS: \n");
+    for(i=0;i<n;i++)
+      printf("%d ",a[i]);
+}
+
+
+SELECTION SORT-ASCENDING
+
+#include<stdio.h>
+int main()
+{
+    int a[20],i,j,k,n,temp;
+    printf("ENTER NUMBER OF ARRAY ELEMENTS\n");
+    scanf("%d",&n);
+    printf("ENTER ARRAY ELEMENTS\n");
+    for(i=0;i<n;i++)
+      scanf("%d",&a[i]);
+    for(i=0;i<n-1;i++)
+    {
+        k=i;
+        for(j=i+1;j<n;j++)
+        {
+            if(a[j]<a[k])
+              k=j;
+        }
+        if(k!=i)
+        {
+         temp=a[i];
+         a[i]=a[k];
+         a[k]=temp;
+        }
+    }
+    printf("SORTED ARRAY IS \n");
+    for(i=0;i<n;i++)
+      printf("%d ,",a[i]);
+}
+
+
+SELECTION SORT-DESCENDING
+
+#include<stdio.h>
+int main()
+{
+    int a[20],i,j,k,n,temp;
+    printf("ENTER NUMBER OF ARRAY ELEMENTS\n");
+    scanf("%d",&n);
+    printf("ENTER ARRAY ELEMENTS\n");
+    for(i=0;i<n;i++)
+      scanf("%d",&a[i]);
+    for(i=0;i<n-1;i++)
+    {
+        k=i;
+        for(j=i+1;j<n;j++)
+        {
+            if(a[j]>a[k])
+              k=j;
+        }
+        if(k!=i)
+        {
+         temp=a[i];
+         a[i]=a[k];
+         a[k]=temp;
+        }
+    }
+    printf("SORTED ARRAY IS \n");
+    for(i=0;i<n;i++)
+      printf("%d ,",a[i]);
+}

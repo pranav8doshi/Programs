@@ -1,0 +1,552 @@
+SINGLY LINKED LIST:
+
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+    int data;
+    struct node *next;
+}node;
+node *create()
+{
+    node *head,*p;
+    int n,i;
+    printf("ENTER NUMBER OF NODES \n");
+    scanf("%d",&n);
+    if(n>0)
+    {
+        head=(node*)malloc(sizeof(node));
+        printf("ENTER DATA \n");
+        scanf("%d",&head->data);
+        head->next=NULL;
+        p=head;
+        for(i=1;i<n;i++)
+        {
+            p->next=(node*)malloc(sizeof(node));
+            p=p->next;
+            printf("ENTER DATA \n");
+            scanf("%d",&p->data);
+            p->next=NULL;
+        }
+    }
+        return head;
+}
+void display(node *head)
+{
+    node*p=head;
+    while(p!=NULL)
+    {
+        printf("\t%d\t",p->data);
+        p=p->next;
+    }
+    printf("\n");
+}
+int count(node *head)
+{
+    int cnt=0;
+    node*p=head;
+    while(p!=NULL)
+    {
+        cnt++;
+        p=p->next;
+    }
+return cnt;    
+}
+void sort_bubble(node *head)
+{
+    node *p;
+    int temp,i,j;
+    int n=count(head);
+    for(i=1;i<n;i++)
+    {
+        p=head;
+        for(j=0;j<n-i;j++)
+        {
+            if(p->data>p->next->data)
+            {
+                temp=p->data;
+                p->data=p->next->data;
+                p->next->data=temp;
+            }
+          p=p->next;  
+        }
+    }
+    printf("SORTED LIST IS : ");
+    display(head);
+}
+node * insert_b(node *head)
+{
+    node *p;
+    p=(node*)malloc(sizeof(node));
+    printf("ENTER DATA \n");
+    scanf("%d",&p->data);
+    p->next=head;
+    head=p;
+    return head;
+}
+node *insert_e(node *head)
+{
+    node *p,*q;
+    p=(node*)malloc(sizeof(node));
+    printf("ENTER DATA \n");
+    scanf("%d",&p->data);
+    p->next=NULL;
+    q=head;
+    while(q->next!=NULL)
+      q=q->next;
+    q->next=p;
+    return head;  
+}
+node *insert_i(node *head)
+{
+    node *p,*q;
+    int key;
+    p=(node*)malloc(sizeof(node));
+    printf("ENTER DATA \n");
+    scanf("%d",&p->data);
+    p->next=NULL;
+    q=head;
+    printf("ENTER KEY \n");
+    scanf("%d",&key);
+    while(q->data!=key&&q!=NULL)
+        q=q->next;
+        if(q!=NULL)
+        {
+            p->next=q->next;
+            q->next=p;
+        }
+        else
+            printf("KEY NOT FOUND");
+    return head;        
+}
+node *delete_b(node *head)
+{
+    node *p;
+    if(head==NULL)
+      printf("LINKED LIST IS EMPTY. DELETION NOT POSSIBLE!\n");
+    else if(head->next==NULL)
+    {
+        p=head;
+        head=NULL;
+        free(p);
+        printf("LINKED LIST IS EMPTY NOW\n");
+    }  
+    else
+    {
+        p=head;
+        head=head->next;
+        free(p);
+        printf("NODE IS DELETED\n");
+    }
+    return head;
+}
+node *delete_e(node *head)
+{
+    node *p,*q;
+    if(head==NULL)
+      printf("LINKED LIST IS EMPTY.DELETION NOT POSSIBLE \n");
+    else if(head->next==NULL)
+    {
+        p=head;
+        head=NULL;
+        free(p);
+        printf("LINKED LIST IS NOW EMPTY \n");
+    }  
+    else
+    {
+       q=head;
+       while(q->next->next!=NULL)
+          q=q->next;
+        p=q->next;
+        q->next=NULL;
+        free(p);
+    }
+    return head;
+}
+node *delete_i(node *head)
+{
+    node *p,*q;
+    int key;
+    printf("ENTER KEY \n");
+    scanf("%d",&key);
+    if(head==NULL)
+      printf("LINKED LIST IS EMPTY \n");
+    else if(head->next==NULL)
+    {
+        if(head->data==key)
+        {
+            p=head;
+            head=NULL;
+            free(p);
+        }
+        else
+            printf("KEY NOT FOUND \n");
+    }  
+    else
+    {
+        if(head->data==key)
+        {
+            p=head;
+            head=head->next;
+            free(p);
+        }
+        else
+        {
+            q=head;
+            while(q->next->data!=key)
+            { 
+                if(q->next->next==NULL)
+                {
+                    printf("Key not found");
+                    return head;
+                }
+                q=q->next;
+            }
+            
+               p=q->next;
+               q->next=p->next;
+               free(p);
+            }       
+        }
+    return head;
+}
+int main()
+{
+  node *head=NULL;
+  int n,x,n1,c;
+  head=create();
+  printf(".......... MENU ..........\n");
+  printf("1.COUNT NUMBER OF ELEMENTS \n2.INSERT AN ELEMENT \n3.DELETE AN ELEMENT \n4.SORT STACK ELEMENTS\n5.DISPLAY STACK ELEMENTS\n6.EXIT\n");
+  do
+  {
+    printf("ENTER CHOICE: ");
+    scanf("%d",&n);
+    switch(n)
+    {
+        case 1:
+            c=count(head);
+            printf("NUMBER OF ELEMENTS %d \n",c);
+            break;             
+        case 2:
+            printf("CHOOSE WHERE TO INSERT THE ELEMENT:\t1.BEGINNING\t2.END\t3.AFTER A CERTAIN ELEMENT\n");
+            scanf("%d",&n1);
+            switch(n1) 
+            {
+                case 1:
+                       head=insert_b(head);
+                       break;
+                case 2:
+                       head=insert_e(head);
+                       break;
+                case 3:
+                       head=insert_i(head);
+                       break;
+                default:
+                        printf("WRONG CHOICE \n");                     
+            }  
+            display(head);
+            break;
+        case 3:
+            printf("CHOOSE WHERE TO DELETE THE ELEMENT FROM:\t1.BEGINNING\t2.END\t3.MIDDLE\n");
+            scanf("%d",&n1);
+            switch(n1) 
+            {
+                case 1:
+                       head=delete_b(head);
+                       break;
+                case 2:
+                       head=delete_e(head);
+                       break;
+                case 3:
+                       head=delete_i(head);
+                       break;
+                default:
+                        printf("WRONG CHOICE \n");                     
+            }  
+            display(head);
+            break;
+        case 4:
+            sort_bubble(head);
+            break;
+        case 5:
+             display(head);
+             break;
+        default:
+            printf("OKAY BYE!\n");               
+    }
+  }while(n>0&&n<=5);
+}
+
+
+
+
+
+
+
+
+
+DOUBLY LINKED LIST:
+
+
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+    int data;
+    struct node *prev;
+    struct node *next;
+}node;
+node *create()
+{
+  node *head,*p;
+  int i,n;
+  printf("ENTER NUMBER OF NODES\n");
+  scanf("%d",&n);
+  if(n>0)
+  {
+    head=(node*)malloc(sizeof(node));
+    head->prev=NULL;
+    head->next=NULL;
+    printf("ENTER DATA\n");
+    scanf("%d",&head->data);
+    p=head;
+    for(i=1;i<n;i++)
+    {
+        p->next=(node*)malloc(sizeof(node));
+        p->next->prev=p;
+        p=p->next;
+        printf("ENTER DATA\n");
+        scanf("%d",&p->data);
+        p->next=NULL;
+    }
+  }
+  else
+    printf("WRONG INPUT\n");
+  return head;  
+}
+void display(node *head)
+{
+    node *p;
+    p=head;
+    while(p!=NULL)
+    {
+      printf("%d\t",p->data);
+      p=p->next;
+    }
+    printf("\n");
+}
+int count(node *head)
+{
+    node *p;
+    p=head;
+    int c;
+    c=0;
+    while(p!=NULL)
+    {
+      c++;
+      p=p->next;
+    }
+    return c;
+}
+node *insert_b(node *head)
+{
+    node *p;
+    p=(node*)malloc(sizeof(node));
+    p->prev=NULL;
+    p->next=head;
+    printf("ENTER DATA\n");
+    scanf("%d",&p->data);
+    head=p;
+    return head;
+}
+node *insert_e(node *head)
+{
+    node *p,*q;
+    q=head;
+    while(q->next!=NULL)
+      q=q->next;
+    p=(node*)malloc(sizeof(node));
+    q->next=p;
+    p->prev=q;
+    p->next=NULL;
+    printf("ENTER DATA\n");
+    scanf("%d",&p->data);
+    return head;
+}
+node *insert_i(node *head)
+{
+    node *p,*q;
+    int key;
+    p=(node*)malloc(sizeof(node));
+    p->next=NULL;
+    p->prev=NULL;
+    printf("ENTER KEY\n");
+    scanf("%d",&key);
+    q=head;
+    while(q->data!=key&&q!=NULL)
+        q=q->next;
+    if(q!=NULL)
+    {
+      printf("ENTER DATA\n");
+      scanf("%d",&p->data);
+      p->prev=q;
+      p->next=q->next;
+      q->next=p;
+    }     
+    else
+       printf("KEY NOT FOUND\n");  
+    return head;
+}
+node *delete_b(node *head)
+{
+    node *p;
+    p=head;
+    if(head==NULL)
+      printf("LINKED LIST IS EMPTY. CANNOT DELETE\n");
+    else if(head->next==NULL)
+    {
+      head=NULL;
+      free(p);
+      printf("LINKED LIST IS NOW EMPTY\n");
+    } 
+    else
+    { 
+      head=head->next;
+      head->prev=NULL;
+      free(p);
+    }
+    return head;
+}
+node *delete_e(node *head)
+{
+    node *p;
+    p=head;
+    if(head==NULL)
+      printf("LINKED LIST IS EMPTY. CANNOT DELETE\n");
+    else if(head->next==NULL)
+    {
+      head=NULL;
+      free(p);
+      printf("LINKED LIST IS NOW EMPTY\n");
+    } 
+    else
+    {
+        while(p->next!=NULL)
+           p=p->next;
+        p->prev->next=NULL;
+        free(p); 
+    }
+    return head;
+}
+node *delete_i(node *head)
+{
+    node *p,*q;
+    int key;
+    p=head;
+    printf("ENTER KEY\n");
+        scanf("%d",&key);
+    if(head==NULL)
+      printf("LINKED LIST IS EMPTY. CANNOT DELETE\n");
+    else if(head->next==NULL)
+    {
+      if(head->data==key)
+      {
+      head=NULL;
+      free(p);
+      printf("LINKED LIST IS NOW EMPTY\n");
+      }
+      else
+      printf("Key not found!!!");
+    } 
+    else
+    {
+      if(head->data==key)
+      {
+        p=head;
+        head=head->next;
+        head->prev=NULL;
+      }
+       else
+       {
+        while(p->next->data!=key)
+        {
+          if(p->next->next==NULL)
+          {
+            printf("Key not found");
+            return head;
+          }
+         p=p->next;
+        }
+        q=p->next;
+        q->next->prev=p;
+        p->next=q->next;
+        free (p);
+       }
+    }
+      return head;
+  }
+int main()
+{
+  node *head=NULL;
+  int n,x,n1,c;
+  head=create();
+  printf(".......... MENU ..........\n");
+  printf("1.COUNT NUMBER OF ELEMENTS \n2.INSERT AN ELEMENT \n3.DELETE AN ELEMENT \n4.DISPLAY STACK ELEMENTS\n5.EXIT\n");
+  do
+  {
+    printf("ENTER CHOICE: ");
+    scanf("%d",&n);
+    switch(n)
+    {
+        case 1:
+            c=count(head);
+            printf("NUMBER OF ELEMENTS %d \n",c);
+            break;             
+        case 2:
+            printf("CHOOSE WHERE TO INSERT THE ELEMENT:\t1.BEGINNING\t2.END\t3.AFTER A CERTAIN ELEMENT\n");
+            scanf("%d",&n1);
+            switch(n1) 
+            {
+                case 1:
+                       head=insert_b(head);
+                       break;
+                case 2:
+                       head=insert_e(head);
+                       break;
+                case 3:
+                       head=insert_i(head);
+                       break;
+                default:
+                        printf("WRONG CHOICE \n");                     
+            }  
+            display(head);
+            break;
+        case 3:
+            printf("CHOOSE WHERE TO DELETE THE ELEMENT FROM:\t1.BEGINNING\t2.END\t3.AFTER A CERTAIN ELEMENT\n");
+            scanf("%d",&n1);
+            switch(n1) 
+            {
+                case 1:
+                       head=delete_b(head);
+                       break;
+                case 2:
+                       head=delete_e(head);
+              break;
+                case 3:
+                       head=delete_i(head);
+                       break;
+                default:
+                        printf("WRONG CHOICE \n");                     
+            }  
+            display(head);
+            break;
+        case 4:
+             display(head);
+             break;
+        default:
+            printf("OKAY BYE!\n");               
+    }
+  }while(n>0&&n<=5);
+}
+
+
